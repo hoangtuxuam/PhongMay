@@ -1,0 +1,52 @@
+﻿@model ShopAcc.Models.SKIN
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/ShopAdministrator/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>SKIN</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TEN, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.TEN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TEN)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HINHANH, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input name="HINHANH" class="files" type="file" />
+                @Html.ValidationMessageFor(model => model.HINHANH)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại danh sách", "Index")
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".files").kendoUpload();
+    });
+</script>

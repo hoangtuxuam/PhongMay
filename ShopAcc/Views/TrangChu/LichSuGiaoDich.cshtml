@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ShopAcc.Models.LOLACC>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LichSuGiaoDich</title>
+</head>
+<body>
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Danh sách Acc đã mua</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên</th>
+                            <th>Mật khẩu</th>
+                            <th>Rank</th>
+                            <th>Giá</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model) {
+                        <tr>
+                            <td>@item.ID</td>
+                            <td>@item.TEN</td>
+                            <td>@item.PASSWORD</td>
+                            <td>@item.RANK.TEN</td>
+                            <td>@item.GIA</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

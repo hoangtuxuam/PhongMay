@@ -1,0 +1,35 @@
+﻿@model ShopAcc.Models.RANK
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/ShopAdministrator/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RANK</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HINHANH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HINHANH)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Quay lại danh sách", "Index")
+</p>

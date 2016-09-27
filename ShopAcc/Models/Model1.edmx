@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ShopAccModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACC_SKIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ACCID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SKINID" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOLACC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TEN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GIA" Type="int" Nullable="false" />
+          <Property Name="MOTA" Type="nvarchar" MaxLength="4000" />
+          <Property Name="RANKID" Type="nvarchar" MaxLength="50" />
+          <Property Name="USERNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RANK">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TEN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HINHANH" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SKIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TEN" Type="nvarchar" MaxLength="50" />
+          <Property Name="HINHANH" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="THANHVIEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="100" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="100" />
+          <Property Name="FULLNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="AVATAR" Type="nvarchar" MaxLength="200" />
+          <Property Name="MONEY" Type="int" />
+        </EntityType>
+        <Association Name="FK_ACC_SKIN_LOLACC">
+          <End Role="LOLACC" Type="Self.LOLACC" Multiplicity="1" />
+          <End Role="ACC_SKIN" Type="Self.ACC_SKIN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOLACC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ACC_SKIN">
+              <PropertyRef Name="ACCID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACC_SKIN_SKIN">
+          <End Role="SKIN" Type="Self.SKIN" Multiplicity="1" />
+          <End Role="ACC_SKIN" Type="Self.ACC_SKIN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SKIN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ACC_SKIN">
+              <PropertyRef Name="SKINID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOLACC_RANK">
+          <End Role="RANK" Type="Self.RANK" Multiplicity="0..1" />
+          <End Role="LOLACC" Type="Self.LOLACC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RANK">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOLACC">
+              <PropertyRef Name="RANKID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShopAccModelStoreContainer">
+          <EntitySet Name="ACC_SKIN" EntityType="Self.ACC_SKIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOLACC" EntityType="Self.LOLACC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RANK" EntityType="Self.RANK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SKIN" EntityType="Self.SKIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THANHVIEN" EntityType="Self.THANHVIEN" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ACC_SKIN_LOLACC" Association="Self.FK_ACC_SKIN_LOLACC">
+            <End Role="LOLACC" EntitySet="LOLACC" />
+            <End Role="ACC_SKIN" EntitySet="ACC_SKIN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACC_SKIN_SKIN" Association="Self.FK_ACC_SKIN_SKIN">
+            <End Role="SKIN" EntitySet="SKIN" />
+            <End Role="ACC_SKIN" EntitySet="ACC_SKIN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOLACC_RANK" Association="Self.FK_LOLACC_RANK">
+            <End Role="RANK" EntitySet="RANK" />
+            <End Role="LOLACC" EntitySet="LOLACC" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShopAccModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACC_SKIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ACCID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SKINID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LOLACC" Relationship="Self.FK_ACC_SKIN_LOLACC" FromRole="ACC_SKIN" ToRole="LOLACC" />
+          <NavigationProperty Name="SKIN" Relationship="Self.FK_ACC_SKIN_SKIN" FromRole="ACC_SKIN" ToRole="SKIN" />
+        </EntityType>
+        <EntityType Name="LOLACC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GIA" Type="Int32" Nullable="false" />
+          <Property Name="MOTA" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="RANKID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ACC_SKIN" Relationship="Self.FK_ACC_SKIN_LOLACC" FromRole="LOLACC" ToRole="ACC_SKIN" />
+          <NavigationProperty Name="RANK" Relationship="Self.FK_LOLACC_RANK" FromRole="LOLACC" ToRole="RANK" />
+        </EntityType>
+        <EntityType Name="RANK">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HINHANH" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LOLACCs" Relationship="Self.FK_LOLACC_RANK" FromRole="RANK" ToRole="LOLACC" />
+        </EntityType>
+        <EntityType Name="SKIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HINHANH" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ACC_SKIN" Relationship="Self.FK_ACC_SKIN_SKIN" FromRole="SKIN" ToRole="ACC_SKIN" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="THANHVIEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FULLNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AVATAR" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MONEY" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_ACC_SKIN_LOLACC">
+          <End Role="LOLACC" Type="Self.LOLACC" Multiplicity="1" />
+          <End Role="ACC_SKIN" Type="Self.ACC_SKIN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOLACC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ACC_SKIN">
+              <PropertyRef Name="ACCID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACC_SKIN_SKIN">
+          <End Role="SKIN" Type="Self.SKIN" Multiplicity="1" />
+          <End Role="ACC_SKIN" Type="Self.ACC_SKIN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SKIN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ACC_SKIN">
+              <PropertyRef Name="SKINID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOLACC_RANK">
+          <End Role="RANK" Type="Self.RANK" Multiplicity="0..1" />
+          <End Role="LOLACC" Type="Self.LOLACC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RANK">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOLACC">
+              <PropertyRef Name="RANKID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShopAccEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACC_SKIN" EntityType="Self.ACC_SKIN" />
+          <EntitySet Name="LOLACCs" EntityType="Self.LOLACC" />
+          <EntitySet Name="RANKs" EntityType="Self.RANK" />
+          <EntitySet Name="SKINs" EntityType="Self.SKIN" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="THANHVIENs" EntityType="Self.THANHVIEN" />
+          <AssociationSet Name="FK_ACC_SKIN_LOLACC" Association="Self.FK_ACC_SKIN_LOLACC">
+            <End Role="LOLACC" EntitySet="LOLACCs" />
+            <End Role="ACC_SKIN" EntitySet="ACC_SKIN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACC_SKIN_SKIN" Association="Self.FK_ACC_SKIN_SKIN">
+            <End Role="SKIN" EntitySet="SKINs" />
+            <End Role="ACC_SKIN" EntitySet="ACC_SKIN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOLACC_RANK" Association="Self.FK_LOLACC_RANK">
+            <End Role="RANK" EntitySet="RANKs" />
+            <End Role="LOLACC" EntitySet="LOLACCs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ShopAccModelStoreContainer" CdmEntityContainer="ShopAccEntities">
+          <EntitySetMapping Name="ACC_SKIN">
+            <EntityTypeMapping TypeName="ShopAccModel.ACC_SKIN">
+              <MappingFragment StoreEntitySet="ACC_SKIN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ACCID" ColumnName="ACCID" />
+                <ScalarProperty Name="SKINID" ColumnName="SKINID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOLACCs">
+            <EntityTypeMapping TypeName="ShopAccModel.LOLACC">
+              <MappingFragment StoreEntitySet="LOLACC">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TEN" ColumnName="TEN" />
+                <ScalarProperty Name="GIA" ColumnName="GIA" />
+                <ScalarProperty Name="MOTA" ColumnName="MOTA" />
+                <ScalarProperty Name="RANKID" ColumnName="RANKID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RANKs">
+            <EntityTypeMapping TypeName="ShopAccModel.RANK">
+              <MappingFragment StoreEntitySet="RANK">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TEN" ColumnName="TEN" />
+                <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SKINs">
+            <EntityTypeMapping TypeName="ShopAccModel.SKIN">
+              <MappingFragment StoreEntitySet="SKIN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TEN" ColumnName="TEN" />
+                <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ShopAccModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THANHVIENs">
+            <EntityTypeMapping TypeName="ShopAccModel.THANHVIEN">
+              <MappingFragment StoreEntitySet="THANHVIEN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+                <ScalarProperty Name="AVATAR" ColumnName="AVATAR" />
+                <ScalarProperty Name="MONEY" ColumnName="MONEY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

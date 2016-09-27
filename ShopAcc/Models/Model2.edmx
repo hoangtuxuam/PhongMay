@@ -1,0 +1,669 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ShopAccModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACC_SKIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ACCID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SKINID" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ANH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LINK" Type="nvarchar" MaxLength="500" />
+          <Property Name="ACCID" Type="nvarchar" MaxLength="50" />
+          <Property Name="LOAI" Type="int" />
+        </EntityType>
+        <EntityType Name="GIAODICH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="THANHVIENID" Type="nvarchar" MaxLength="50" />
+          <Property Name="NOIDUNG" Type="nvarchar" MaxLength="200" />
+          <Property Name="SOTIEN" Type="bigint" />
+          <Property Name="THOIDIEM" Type="datetime" />
+          <Property Name="MAGIAODICH" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HOITHOAI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="THANHVIEN" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LOLACC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TEN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GIA" Type="int" Nullable="false" />
+          <Property Name="MOTA" Type="nvarchar" MaxLength="4000" />
+          <Property Name="RANKID" Type="nvarchar" MaxLength="50" />
+          <Property Name="USERNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="50" />
+          <Property Name="THANHVIENID" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RANK">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TEN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HINHANH" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SKIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TEN" Type="nvarchar" MaxLength="50" />
+          <Property Name="HINHANH" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="THANHVIEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="100" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="100" />
+          <Property Name="FULLNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="AVATAR" Type="nvarchar" MaxLength="4000" />
+          <Property Name="MONEY" Type="int" />
+          <Property Name="QUYEN" Type="int" />
+        </EntityType>
+        <EntityType Name="TINNHAN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HOITHOAIID" Type="nvarchar" MaxLength="50" />
+          <Property Name="NGUOIGUI" Type="nvarchar" MaxLength="50" />
+          <Property Name="TINNHAN" Type="nvarchar(max)" />
+          <Property Name="NGAYGUI" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_ACC_SKIN_LOLACC">
+          <End Role="LOLACC" Type="Self.LOLACC" Multiplicity="1" />
+          <End Role="ACC_SKIN" Type="Self.ACC_SKIN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOLACC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ACC_SKIN">
+              <PropertyRef Name="ACCID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACC_SKIN_SKIN">
+          <End Role="SKIN" Type="Self.SKIN" Multiplicity="1" />
+          <End Role="ACC_SKIN" Type="Self.ACC_SKIN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SKIN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ACC_SKIN">
+              <PropertyRef Name="SKINID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ANH_LOLACC">
+          <End Role="LOLACC" Type="Self.LOLACC" Multiplicity="0..1" />
+          <End Role="ANH" Type="Self.ANH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOLACC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ANH">
+              <PropertyRef Name="ACCID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GIAODICH_THANHVIEN">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="0..1" />
+          <End Role="GIAODICH" Type="Self.GIAODICH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GIAODICH">
+              <PropertyRef Name="THANHVIENID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HOITHOAI_THANHVIEN">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="0..1" />
+          <End Role="HOITHOAI" Type="Self.HOITHOAI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HOITHOAI">
+              <PropertyRef Name="THANHVIEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOLACC_RANK">
+          <End Role="RANK" Type="Self.RANK" Multiplicity="0..1" />
+          <End Role="LOLACC" Type="Self.LOLACC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RANK">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOLACC">
+              <PropertyRef Name="RANKID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOLACC_THANHVIEN">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="0..1" />
+          <End Role="LOLACC" Type="Self.LOLACC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOLACC">
+              <PropertyRef Name="THANHVIENID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TINNHAN_HOITHOAI">
+          <End Role="HOITHOAI" Type="Self.HOITHOAI" Multiplicity="0..1" />
+          <End Role="TINNHAN" Type="Self.TINNHAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOITHOAI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TINNHAN">
+              <PropertyRef Name="HOITHOAIID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TINNHAN_THANHVIEN">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="0..1" />
+          <End Role="TINNHAN" Type="Self.TINNHAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TINNHAN">
+              <PropertyRef Name="NGUOIGUI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShopAccModelStoreContainer">
+          <EntitySet Name="ACC_SKIN" EntityType="Self.ACC_SKIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ANH" EntityType="Self.ANH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GIAODICH" EntityType="Self.GIAODICH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HOITHOAI" EntityType="Self.HOITHOAI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOLACC" EntityType="Self.LOLACC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RANK" EntityType="Self.RANK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SKIN" EntityType="Self.SKIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THANHVIEN" EntityType="Self.THANHVIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TINNHAN" EntityType="Self.TINNHAN" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ACC_SKIN_LOLACC" Association="Self.FK_ACC_SKIN_LOLACC">
+            <End Role="LOLACC" EntitySet="LOLACC" />
+            <End Role="ACC_SKIN" EntitySet="ACC_SKIN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACC_SKIN_SKIN" Association="Self.FK_ACC_SKIN_SKIN">
+            <End Role="SKIN" EntitySet="SKIN" />
+            <End Role="ACC_SKIN" EntitySet="ACC_SKIN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ANH_LOLACC" Association="Self.FK_ANH_LOLACC">
+            <End Role="LOLACC" EntitySet="LOLACC" />
+            <End Role="ANH" EntitySet="ANH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GIAODICH_THANHVIEN" Association="Self.FK_GIAODICH_THANHVIEN">
+            <End Role="THANHVIEN" EntitySet="THANHVIEN" />
+            <End Role="GIAODICH" EntitySet="GIAODICH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HOITHOAI_THANHVIEN" Association="Self.FK_HOITHOAI_THANHVIEN">
+            <End Role="THANHVIEN" EntitySet="THANHVIEN" />
+            <End Role="HOITHOAI" EntitySet="HOITHOAI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOLACC_RANK" Association="Self.FK_LOLACC_RANK">
+            <End Role="RANK" EntitySet="RANK" />
+            <End Role="LOLACC" EntitySet="LOLACC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOLACC_THANHVIEN" Association="Self.FK_LOLACC_THANHVIEN">
+            <End Role="THANHVIEN" EntitySet="THANHVIEN" />
+            <End Role="LOLACC" EntitySet="LOLACC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TINNHAN_HOITHOAI" Association="Self.FK_TINNHAN_HOITHOAI">
+            <End Role="HOITHOAI" EntitySet="HOITHOAI" />
+            <End Role="TINNHAN" EntitySet="TINNHAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TINNHAN_THANHVIEN" Association="Self.FK_TINNHAN_THANHVIEN">
+            <End Role="THANHVIEN" EntitySet="THANHVIEN" />
+            <End Role="TINNHAN" EntitySet="TINNHAN" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShopAccModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACC_SKIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ACCID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SKINID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LOLACC" Relationship="Self.FK_ACC_SKIN_LOLACC" FromRole="ACC_SKIN" ToRole="LOLACC" />
+          <NavigationProperty Name="SKIN" Relationship="Self.FK_ACC_SKIN_SKIN" FromRole="ACC_SKIN" ToRole="SKIN" />
+        </EntityType>
+        <EntityType Name="LOLACC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GIA" Type="Int32" Nullable="false" />
+          <Property Name="MOTA" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="RANKID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ACC_SKIN" Relationship="Self.FK_ACC_SKIN_LOLACC" FromRole="LOLACC" ToRole="ACC_SKIN" />
+          <NavigationProperty Name="RANK" Relationship="Self.FK_LOLACC_RANK" FromRole="LOLACC" ToRole="RANK" />
+          <NavigationProperty Name="ANHs" Relationship="ShopAccModel.FK_ANH_LOLACC" FromRole="LOLACC" ToRole="ANH" />
+          <Property Name="THANHVIENID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="THANHVIEN" Relationship="ShopAccModel.FK_LOLACC_THANHVIEN" FromRole="LOLACC" ToRole="THANHVIEN" />
+        </EntityType>
+        <EntityType Name="RANK">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HINHANH" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LOLACCs" Relationship="Self.FK_LOLACC_RANK" FromRole="RANK" ToRole="LOLACC" />
+        </EntityType>
+        <EntityType Name="SKIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HINHANH" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ACC_SKIN" Relationship="Self.FK_ACC_SKIN_SKIN" FromRole="SKIN" ToRole="ACC_SKIN" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="THANHVIEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FULLNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AVATAR" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="MONEY" Type="Int32" />
+          <NavigationProperty Name="GIAODICHes" Relationship="ShopAccModel.FK_GIAODICH_THANHVIEN" FromRole="THANHVIEN" ToRole="GIAODICH" />
+          <Property Name="QUYEN" Type="Int32" />
+          <NavigationProperty Name="LOLACCs" Relationship="ShopAccModel.FK_LOLACC_THANHVIEN" FromRole="THANHVIEN" ToRole="LOLACC" />
+          <NavigationProperty Name="HOITHOAIs" Relationship="ShopAccModel.FK_HOITHOAI_THANHVIEN" FromRole="THANHVIEN" ToRole="HOITHOAI" />
+          <NavigationProperty Name="TINNHANs" Relationship="ShopAccModel.FK_TINNHAN_THANHVIEN" FromRole="THANHVIEN" ToRole="TINNHAN" />
+        </EntityType>
+        <Association Name="FK_ACC_SKIN_LOLACC">
+          <End Role="LOLACC" Type="Self.LOLACC" Multiplicity="1" />
+          <End Role="ACC_SKIN" Type="Self.ACC_SKIN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOLACC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ACC_SKIN">
+              <PropertyRef Name="ACCID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACC_SKIN_SKIN">
+          <End Role="SKIN" Type="Self.SKIN" Multiplicity="1" />
+          <End Role="ACC_SKIN" Type="Self.ACC_SKIN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SKIN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ACC_SKIN">
+              <PropertyRef Name="SKINID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOLACC_RANK">
+          <End Role="RANK" Type="Self.RANK" Multiplicity="0..1" />
+          <End Role="LOLACC" Type="Self.LOLACC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RANK">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOLACC">
+              <PropertyRef Name="RANKID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShopAccEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACC_SKIN" EntityType="Self.ACC_SKIN" />
+          <EntitySet Name="LOLACCs" EntityType="Self.LOLACC" />
+          <EntitySet Name="RANKs" EntityType="Self.RANK" />
+          <EntitySet Name="SKINs" EntityType="Self.SKIN" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="THANHVIENs" EntityType="Self.THANHVIEN" />
+          <AssociationSet Name="FK_ACC_SKIN_LOLACC" Association="Self.FK_ACC_SKIN_LOLACC">
+            <End Role="LOLACC" EntitySet="LOLACCs" />
+            <End Role="ACC_SKIN" EntitySet="ACC_SKIN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACC_SKIN_SKIN" Association="Self.FK_ACC_SKIN_SKIN">
+            <End Role="SKIN" EntitySet="SKINs" />
+            <End Role="ACC_SKIN" EntitySet="ACC_SKIN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOLACC_RANK" Association="Self.FK_LOLACC_RANK">
+            <End Role="RANK" EntitySet="RANKs" />
+            <End Role="LOLACC" EntitySet="LOLACCs" />
+          </AssociationSet>
+          <EntitySet Name="GIAODICHes" EntityType="ShopAccModel.GIAODICH" />
+          <AssociationSet Name="FK_GIAODICH_THANHVIEN" Association="ShopAccModel.FK_GIAODICH_THANHVIEN">
+            <End Role="THANHVIEN" EntitySet="THANHVIENs" />
+            <End Role="GIAODICH" EntitySet="GIAODICHes" />
+          </AssociationSet>
+          <EntitySet Name="ANHs" EntityType="ShopAccModel.ANH" />
+          <AssociationSet Name="FK_ANH_LOLACC" Association="ShopAccModel.FK_ANH_LOLACC">
+            <End Role="LOLACC" EntitySet="LOLACCs" />
+            <End Role="ANH" EntitySet="ANHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOLACC_THANHVIEN" Association="ShopAccModel.FK_LOLACC_THANHVIEN">
+            <End Role="THANHVIEN" EntitySet="THANHVIENs" />
+            <End Role="LOLACC" EntitySet="LOLACCs" />
+          </AssociationSet>
+          <EntitySet Name="HOITHOAIs" EntityType="ShopAccModel.HOITHOAI" />
+          <EntitySet Name="TINNHANs" EntityType="ShopAccModel.TINNHAN" />
+          <AssociationSet Name="FK_HOITHOAI_THANHVIEN" Association="ShopAccModel.FK_HOITHOAI_THANHVIEN">
+            <End Role="THANHVIEN" EntitySet="THANHVIENs" />
+            <End Role="HOITHOAI" EntitySet="HOITHOAIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TINNHAN_HOITHOAI" Association="ShopAccModel.FK_TINNHAN_HOITHOAI">
+            <End Role="HOITHOAI" EntitySet="HOITHOAIs" />
+            <End Role="TINNHAN" EntitySet="TINNHANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TINNHAN_THANHVIEN" Association="ShopAccModel.FK_TINNHAN_THANHVIEN">
+            <End Role="THANHVIEN" EntitySet="THANHVIENs" />
+            <End Role="TINNHAN" EntitySet="TINNHANs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="GIAODICH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="THANHVIENID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NOIDUNG" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SOTIEN" Type="Int64" />
+          <Property Name="THOIDIEM" Type="DateTime" Precision="3" />
+          <Property Name="MAGIAODICH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="THANHVIEN" Relationship="ShopAccModel.FK_GIAODICH_THANHVIEN" FromRole="GIAODICH" ToRole="THANHVIEN" />
+        </EntityType>
+        <Association Name="FK_GIAODICH_THANHVIEN">
+          <End Type="ShopAccModel.THANHVIEN" Role="THANHVIEN" Multiplicity="0..1" />
+          <End Type="ShopAccModel.GIAODICH" Role="GIAODICH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GIAODICH">
+              <PropertyRef Name="THANHVIENID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ANH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LINK" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ACCID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LOAI" Type="Int32" />
+          <NavigationProperty Name="LOLACC" Relationship="ShopAccModel.FK_ANH_LOLACC" FromRole="ANH" ToRole="LOLACC" />
+        </EntityType>
+        <Association Name="FK_ANH_LOLACC">
+          <End Type="ShopAccModel.LOLACC" Role="LOLACC" Multiplicity="0..1" />
+          <End Type="ShopAccModel.ANH" Role="ANH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOLACC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ANH">
+              <PropertyRef Name="ACCID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOLACC_THANHVIEN">
+          <End Type="ShopAccModel.THANHVIEN" Role="THANHVIEN" Multiplicity="0..1" />
+          <End Type="ShopAccModel.LOLACC" Role="LOLACC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOLACC">
+              <PropertyRef Name="THANHVIENID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HOITHOAI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="THANHVIEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="THANHVIEN1" Relationship="ShopAccModel.FK_HOITHOAI_THANHVIEN" FromRole="HOITHOAI" ToRole="THANHVIEN" />
+          <NavigationProperty Name="TINNHANs" Relationship="ShopAccModel.FK_TINNHAN_HOITHOAI" FromRole="HOITHOAI" ToRole="TINNHAN" />
+        </EntityType>
+        <EntityType Name="TINNHAN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HOITHOAIID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NGUOIGUI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TINNHAN1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NGAYGUI" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="HOITHOAI" Relationship="ShopAccModel.FK_TINNHAN_HOITHOAI" FromRole="TINNHAN" ToRole="HOITHOAI" />
+          <NavigationProperty Name="THANHVIEN" Relationship="ShopAccModel.FK_TINNHAN_THANHVIEN" FromRole="TINNHAN" ToRole="THANHVIEN" />
+        </EntityType>
+        <Association Name="FK_HOITHOAI_THANHVIEN">
+          <End Type="ShopAccModel.THANHVIEN" Role="THANHVIEN" Multiplicity="0..1" />
+          <End Type="ShopAccModel.HOITHOAI" Role="HOITHOAI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HOITHOAI">
+              <PropertyRef Name="THANHVIEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TINNHAN_HOITHOAI">
+          <End Type="ShopAccModel.HOITHOAI" Role="HOITHOAI" Multiplicity="0..1" />
+          <End Type="ShopAccModel.TINNHAN" Role="TINNHAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOITHOAI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TINNHAN">
+              <PropertyRef Name="HOITHOAIID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TINNHAN_THANHVIEN">
+          <End Type="ShopAccModel.THANHVIEN" Role="THANHVIEN" Multiplicity="0..1" />
+          <End Type="ShopAccModel.TINNHAN" Role="TINNHAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TINNHAN">
+              <PropertyRef Name="NGUOIGUI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ShopAccModelStoreContainer" CdmEntityContainer="ShopAccEntities1">
+          <EntitySetMapping Name="ACC_SKIN">
+            <EntityTypeMapping TypeName="ShopAccModel.ACC_SKIN">
+              <MappingFragment StoreEntitySet="ACC_SKIN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ACCID" ColumnName="ACCID" />
+                <ScalarProperty Name="SKINID" ColumnName="SKINID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOLACCs">
+            <EntityTypeMapping TypeName="ShopAccModel.LOLACC">
+              <MappingFragment StoreEntitySet="LOLACC">
+                <ScalarProperty Name="THANHVIENID" ColumnName="THANHVIENID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TEN" ColumnName="TEN" />
+                <ScalarProperty Name="GIA" ColumnName="GIA" />
+                <ScalarProperty Name="MOTA" ColumnName="MOTA" />
+                <ScalarProperty Name="RANKID" ColumnName="RANKID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RANKs">
+            <EntityTypeMapping TypeName="ShopAccModel.RANK">
+              <MappingFragment StoreEntitySet="RANK">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TEN" ColumnName="TEN" />
+                <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SKINs">
+            <EntityTypeMapping TypeName="ShopAccModel.SKIN">
+              <MappingFragment StoreEntitySet="SKIN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TEN" ColumnName="TEN" />
+                <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ShopAccModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THANHVIENs">
+            <EntityTypeMapping TypeName="ShopAccModel.THANHVIEN">
+              <MappingFragment StoreEntitySet="THANHVIEN">
+                <ScalarProperty Name="QUYEN" ColumnName="QUYEN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+                <ScalarProperty Name="AVATAR" ColumnName="AVATAR" />
+                <ScalarProperty Name="MONEY" ColumnName="MONEY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GIAODICHes">
+            <EntityTypeMapping TypeName="ShopAccModel.GIAODICH">
+              <MappingFragment StoreEntitySet="GIAODICH">
+                <ScalarProperty Name="MAGIAODICH" ColumnName="MAGIAODICH" />
+                <ScalarProperty Name="THOIDIEM" ColumnName="THOIDIEM" />
+                <ScalarProperty Name="SOTIEN" ColumnName="SOTIEN" />
+                <ScalarProperty Name="NOIDUNG" ColumnName="NOIDUNG" />
+                <ScalarProperty Name="THANHVIENID" ColumnName="THANHVIENID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ANHs">
+            <EntityTypeMapping TypeName="ShopAccModel.ANH">
+              <MappingFragment StoreEntitySet="ANH">
+                <ScalarProperty Name="LOAI" ColumnName="LOAI" />
+                <ScalarProperty Name="ACCID" ColumnName="ACCID" />
+                <ScalarProperty Name="LINK" ColumnName="LINK" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOITHOAIs">
+            <EntityTypeMapping TypeName="ShopAccModel.HOITHOAI">
+              <MappingFragment StoreEntitySet="HOITHOAI">
+                <ScalarProperty Name="THANHVIEN" ColumnName="THANHVIEN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TINNHANs">
+            <EntityTypeMapping TypeName="ShopAccModel.TINNHAN">
+              <MappingFragment StoreEntitySet="TINNHAN">
+                <ScalarProperty Name="NGAYGUI" ColumnName="NGAYGUI" />
+                <ScalarProperty Name="TINNHAN1" ColumnName="TINNHAN" />
+                <ScalarProperty Name="NGUOIGUI" ColumnName="NGUOIGUI" />
+                <ScalarProperty Name="HOITHOAIID" ColumnName="HOITHOAIID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

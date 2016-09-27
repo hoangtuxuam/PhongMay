@@ -1,0 +1,73 @@
+﻿@model CardInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>NapThe</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    Mã Thẻ
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.pin, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.pin)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    Mã seri
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.seri, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.seri)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    Loại Thẻ
+                </div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.cardtype, new SelectList(ViewBag.lstCARDTYPE, "Value", "Text"), new { @class = "form-control select2" })
+                    @Html.ValidationMessageFor(model => model.seri)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Nộp" id="submitThe" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#submitThe").click(function () {
+            var pin = $("#pin").val();
+            var seri = $("#seri").val();
+            var cardtype = $("#cardtype").val();
+            $.post("@Url.Action("SubmitThe")", { pin: pin, seri: seri, cardtype: cardtype }, function (data) {
+                alert(data);
+            });
+            return false;
+        });
+    });
+</script>

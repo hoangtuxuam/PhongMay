@@ -1,0 +1,8 @@
+﻿@using ShopAcc.Models;
+@{
+    Layout = null;
+}
+@foreach (LOLACC acc in ViewBag.ACCs)
+{
+    @Html.Partial("_ThongTinAcc", acc)
+}

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ShopAcc.Models.TINNHAN>
+
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    if (item.THANHVIEN.QUYEN == 1)
+    {
+        <p class="bg-danger">@item.TINNHAN1 (@item.NGAYGUI)</p>
+    }
+    else
+    {
+        <p class="bg-primary">@item.TINNHAN1 (@item.NGAYGUI)</p>
+    }
+}
+<div class="form-group">
+    <input type="text" class="form-control" id="txtTinNhan" placeholder="Nhập tin nhắn">
+</div>

@@ -1,0 +1,107 @@
+﻿@using ShopAcc.Models
+@model ShopAcc.Models.LOLACC
+<div class="item col-sm-2 col-xs-3 col-xs-6">
+    <span>
+        <a href="#" class="thumbnail" data-toggle="modal"
+           data-target="#@Model.ID">
+            @if (Model.ANHs.Count > 0)
+            {
+                <img src="@Model.ANHs.FirstOrDefault().LINK" class="img-rounded" style="height: 140px;width: 140px;" alt="ảnh acc">
+            }
+            else
+            {
+                <img src="http://www.upsieutoc.com/images/2016/08/29/Clipboardimage2016-08-29171821.png" class="img-rounded" style="height: 140px;width: 140px;" alt="ảnh acc">
+            }
+            <center>
+                @Model.TEN<br>
+                Rank : @Model.RANK.TEN
+                <br>
+                Giá @Model.GIA
+                <small>vnđ</small>
+            </center>
+        </a>
+        <!-- Thong tin acc -->
+        <div class="modal fade" id="@Model.ID" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Thông tin Acc <color ="red"> @Model.TEN </color></style></h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="@string.Format("#{0}home", Model.ID)">Tổng quan</a></li>
+                            <li><a data-toggle="tab" href="@string.Format("#{0}menu1", Model.ID)">Tướng <p class="label label-success">70</p></a></li>
+                            <li><a data-toggle="tab" href="@string.Format("#{0}menu2", Model.ID)">Skin <p class="label label-danger">20</p></a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="@string.Format("{0}home", Model.ID)" class="tab-pane fade in active">
+                                <br>
+                                <p>Rank : @Model.RANK.TEN </p>
+                                <p>@Html.Raw(HttpUtility.HtmlDecode(Model.MOTA))</p>
+                            </div>
+                            <div id="@string.Format("{0}menu1", Model.ID)" class="tab-pane fade">
+                                <h3>Danh sách tướng</h3>
+                                <div class="box-body">
+                                    <div id="danhsachtuong" class="carousel slide" data-ride="carousel">
+
+                                        <div class="carousel-inner">
+                                            <div class="item active">
+                                                @foreach (ANH item in @Model.ANHs)
+                                                {
+                                                    if (item.LOAI == 1)
+                                                    {
+                                                        <img src="@item.LINK.Replace("~/",string.Empty)" alt="Dsachtuong">
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                        <a class="left carousel-control" href="#danhsachtuong" data-slide="prev">
+                                            <span class="fa fa-angle-left"></span>
+                                        </a>
+                                        <a class="right carousel-control" href="#danhsachtuong" data-slide="next">
+                                            <span class="fa fa-angle-right"></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="@string.Format("{0}menu2", Model.ID)" class="tab-pane fade">
+                                <h3>Danh sách skin</h3>
+                                <div class="box-body">
+                                    @foreach (ANH item in @Model.ANHs)
+                                    {
+                                        if (item.LOAI == 2)
+                                        {
+                                            <img src="@item.LINK.Replace("~/",string.Empty)" alt="Dsachtuong">
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="@string.Format("mua{0}", Model.ID)" type="button" class="btn btn-success">Mua @Model.GIA <small>vnđ</small></button> <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Thong tin acc -->
+    </span>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("@string.Format("#mua{0}", Model.ID)").click(function () {
+            var mua = confirm("Bạn có chắc muốn mua acc @Model.TEN với giá @Model.GIA vnđ???");
+            if (mua) {
+                $.post("@Url.Action("MuaAcc","TrangChu")", {
+                    AccId: "@Model.ID"
+                }, function (data) {
+                    alert(data);
+                });
+            }
+        });
+    });
+</script>

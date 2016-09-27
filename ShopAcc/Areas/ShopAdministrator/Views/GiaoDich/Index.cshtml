@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ShopAcc.Models.GIAODICH>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/ShopAdministrator/Views/Shared/_LayoutAdmin.cshtml";
+}
+<table class="table">
+    <tr>
+        <th>
+            Nội dung giao dịch
+        </th>
+        <th>
+            Số tiền
+        </th>
+        <th>
+            Ngày giao dịch
+        </th>
+        <th>
+            Mã giao dịch
+        </th>
+        <th>
+            Người giao dịch
+        </th>
+    </tr>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOIDUNG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SOTIEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.THOIDIEM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MAGIAODICH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.THANHVIEN.FULLNAME)
+        </td>
+    </tr>
+}
+</table>

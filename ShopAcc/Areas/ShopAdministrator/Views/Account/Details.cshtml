@@ -1,0 +1,67 @@
+﻿@model ShopAcc.Models.LOLACC
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/ShopAdministrator/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LOLACC</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GIA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GIA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MOTA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MOTA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USERNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USERNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PASSWORD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PASSWORD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RANK.TEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RANK.TEN)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Quay lại danh sách", "Index")
+</p>

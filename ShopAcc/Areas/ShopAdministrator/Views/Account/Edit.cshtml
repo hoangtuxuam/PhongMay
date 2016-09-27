@@ -1,0 +1,104 @@
+﻿@model ShopAcc.Models.LOLACC
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/ShopAdministrator/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TEN, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" id="TEN" name="TEN" type="text" value="@Model.TEN">
+                <span class="field-validation-valid" data-valmsg-for="TEN" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GIA, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" id="GIA" name="GIA" type="text" value="@Model.GIA">
+                <span class="field-validation-valid" data-valmsg-for="GIA" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MOTA, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <textarea id="MOTA" name="MOTA" rows="10"></textarea>
+                <span class="field-validation-valid" data-valmsg-for="MOTA" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RANKID, "RANKID", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("RANKID", (SelectList)ViewBag.RANKID, new { @class = "form-control select2" })
+                @Html.ValidationMessageFor(model => model.RANKID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="SKINID">danh sách skin</label>
+            <div class="col-md-10">
+                @Html.ListBox("SKINID", (MultiSelectList)ViewBag.SKINID, new { @class = "form-control select2" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.USERNAME, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" id="USERNAME" name="USERNAME" type="text" value="@Model.USERNAME">
+                <span class="field-validation-valid" data-valmsg-for="USERNAME" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PASSWORD, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" id="PASSWORD" name="PASSWORD" type="text" value="@Model.PASSWORD">
+                <span class="field-validation-valid" data-valmsg-for="PASSWORD" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Ảnh tướng
+            </div>
+            <div class="col-md-10">
+                <input name="ANHTUONG" class="files" type="file" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Ảnh skin
+            </div>
+            <div class="col-md-10">
+                <input name="ANHSKIN" class="files" type="file" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại danh sách", "Index")
+</div>
+<script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var json = @Html.Raw(Json.Encode(@ViewBag.SKINIdSelected));
+        $('#SKINID').val(JSON.parse(json)).trigger("change");;
+        CKEDITOR.replace('MOTA');
+        $(".files").kendoUpload();
+    });
+</script>

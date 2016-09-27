@@ -1,0 +1,59 @@
+﻿@model ShopAcc.Models.THANHVIEN
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/ShopAdministrator/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>THANHVIEN</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PASSWORD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PASSWORD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FULLNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FULLNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AVATAR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AVATAR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MONEY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MONEY)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Quay lại danh sách", "Index")
+</p>

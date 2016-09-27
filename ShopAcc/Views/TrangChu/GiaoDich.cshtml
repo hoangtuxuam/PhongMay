@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ShopAcc.Models.GIAODICH>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LichSuGiaoDich</title>
+</head>
+<body>
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Lịch sử giao dịch</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Mã giao dịch</th>
+                            <th>Nội dung</th>
+                            <th>Số tiền</th>
+                            <th>Ngày giao dịch</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.MAGIAODICH</td>
+                                <td>@item.NOIDUNG</td>
+                                <td>@item.SOTIEN</td>
+                                <td>@item.THOIDIEM</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
