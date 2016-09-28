@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -2194,6 +2195,8 @@
     <Content Include="Views\TrangChu\TienFilter.cshtml" />
     <Content Include="Views\TrangChu\GetTinNhan.cshtml" />
     <Content Include="Views\TrangChu\GiaoDich.cshtml" />
+    <Content Include="Views\TrangChu\DangKy.cshtml" />
+    <Content Include="Views\TrangChu\DoiMk.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

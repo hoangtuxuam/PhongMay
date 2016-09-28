@@ -86,6 +86,8 @@
                 </div>
                 <div class="modal fade" id="lichsugiaodich" role="dialog">
                 </div>
+                <div class="modal fade" id="doimk" role="dialog">
+                </div>
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">
@@ -132,10 +134,15 @@
                     $("#FormNapThe").html(data);
                 });
             });
-            
+
             $(".btnDanhSachAcc").click(function () {
                 $.post("@Url.Action("LichSuGiaoDich")", function (data) {
                     $("#lichsumua").html(data);
+                });
+            });
+            $("#btndoimk").click(function () {
+                $.post("@Url.Action("DoiMk")", function (data) {
+                    $("#doimk").html(data);
                 });
             });
             $(".btnLichSuGiaoDich").click(function () {

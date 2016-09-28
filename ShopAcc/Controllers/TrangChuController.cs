@@ -186,5 +186,32 @@ namespace ShopAcc.Controllers
             List<GIAODICH> lstGiaoDich = db.GIAODICHes.Where(p => p.THANHVIENID == tv.ID).ToList();
             return View(lstGiaoDich);
         }
+
+        public ActionResult DoiMk()
+        {
+            return View();
+        }
+        public JsonResult ChangPass()
+        {
+            AdminSession ses = new AdminSession();
+            THANHVIEN tv = ses.getSession();
+            string oldPass = Request["oldPass"];
+            string newPass = Request["newPass"];
+            string confPass = Request["confPass"];
+            if(newPass!=confPass)
+                return Json("Mật khẩu xác nhận không đúng");
+            else
+            {
+                oldPass = MaHoa.md5(oldPass);
+                THANHVIEN cThanhVien = db.THANHVIENs.Where(p => p.ID == tv.ID).FirstOrDefault();
+                if (cThanhVien == null)
+                    return Json("Thành viên không tồn tại");
+                if(cThanhVien.PASSWORD!=oldPass)
+                    return Json("Mật khẩu của bạn không đúng");
+                cThanhVien.PASSWORD = MaHoa.md5(newPass);
+                db.SaveChanges();
+                return Json("");
+            }
+        }
     }
 }

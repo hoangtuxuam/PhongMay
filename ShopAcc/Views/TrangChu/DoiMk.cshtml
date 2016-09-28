@@ -1,0 +1,62 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LichSuGiaoDich</title>
+</head>
+<body>
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Đổi mật khẩu</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <table>
+                        <tr>
+                            <td class="col-md-2">Mật khẩu hiện tại</td>
+                            <td class="col-md-10"><input type="password" class="form-control" name="oldPass" id="oldPass" /></td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2">Mật khẩu mới</td>
+                            <td class="col-md-10"><input type="password" class="form-control" name="newPass" id="newPass" /></td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2">Xác nhận mật khẩu</td>
+                            <td class="col-md-10"><input type="password" class="form-control" name="confPass" id="confPass" /></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button id="btnDoi" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnDoi").click(function () {
+            var oldPass = $("#oldPass").val();
+            var newPass = $("#newPass").val();
+            var confPass = $("#confPass").val();
+            $.post('@Url.Action("ChangPass","TrangChu")', { "oldPass": oldPass, "newPass": newPass, "confPass": confPass }, function (data) {
+                if (data.length == 0)
+                    alert("Đổi mật khẩu thành công");
+                else
+                    alert(data);
+            });
+        });
+    });
+</script>
