@@ -2,6 +2,10 @@
 @{
     Layout = null;
 }
+@if (ViewBag.ACCs.Count == 0)
+{
+    <span>Hiện tại không có tài khoản nào</span>
+}
 @foreach (LOLACC acc in ViewBag.ACCs)
 {
     @Html.Partial("_ThongTinAcc", acc)
